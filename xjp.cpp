@@ -250,11 +250,43 @@ void contest() {
     }
     cout<<"ok Finished "<<score<<" pts\n";
 }
+int interact() {
+    system("clear");
+    cout << "Interaction Training\n\n";
+    for (int i=1;i<=n;++i) {
+        cout<<(i==qr[0]&&1==qc[0]?'[':' ');
+        for (int j=1;j<=m;++j) {
+            cout<<mp[i][j];
+            cout<<(i==qr[0]&&j==qc[0]?']':i==qr[0]&&j==qc[0]-1?'[':' ');
+        }
+        putchar('\n');
+    }
+    cout<<endl;
+    cout<<"Current streak: "<<curstrk<<" | Best: "<<bststrk<<"\nGuess (Arrow Keys) | Check (0) | Exit (quit) | Skip (skip): ";
+    getline(cin,s);
+    if (!s.size()) return 1;
+    c=s[0];
+    if (c=='0') {
+        if (!vis[0]) {
+            if (pr[0]==qr[0]&&pc[0]==qc[0]) vis[0]=1,score+=base;
+            else wa[0]=1;
+        }
+    }
+    else if (c==27) {
+        c=s[2];
+        if (!vis[0]) {
+            if (c==65) qr[0]=(qr[0]+n-2)%n+1;
+            else if (c==66) qr[0]=qr[0]%n+1;
+            else if (c==68) qc[0]=(qc[0]+m-2)%m+1;
+            else if (c==67) qc[0]=qc[0]%m+1;
+        }
+    }
+    else if (s.size()>=4&&s.substr(0,4)=="quit") return 2;
+    else if (s.size()>=4&&s.substr(0,4)=="skip") wa[0] = 1;
+    return 1;
+}
 void find_C_in_A_and_B()
 {
-    system("clear");
-    cout << "Interaction is currently in development. Wait until the next update!\n";
-    return;
     system("clear");
     cout<<"Codeforces (Interaction Training)\nSelect Division ((20,20),(15,15),(10,10)): ";
     cin >> n;
@@ -280,14 +312,76 @@ void find_C_in_A_and_B()
     cout<<"Press <Enter> to start\n";
     getchar();
     getchar();
+    while (1) {
+        system("clear");
+        pr[0]=rnd()%n+1;
+        pc[0]=rnd()%m+1;
+        qw[0]=rnd()%INTER+1;
+        qr[0]=1;
+        qc[0]=1;
+        for (int i=1;i<=n;++i) for (int j=1;j<=m;++j)
+            if (i==pr[0]&&j==pc[0]) mp[i][j]=a1[qw[0]];
+            else if (rnd()&1) mp[i][j]=a2[qw[0]];
+            else mp[i][j]=a3[qw[0]];
+        while (1) {
+            int x=interact();
+            if (x==2) {
+                cout<<"\nok Finished best streak = "<<bststrk<<endl;
+                return;
+            }
+            else if (vis[0]) {
+                vis[0] = 0;
+                setcolor("green");
+                printf("\nAccepted!\n");
+                setcolor();
+                cout<<"Press <Enter> to continue\n";
+                getchar();
+                if (++curstrk > bststrk) bststrk = curstrk;
+                break;
+            }
+            else if (wa[0]) {
+                wa[0] = 0;
+                curstrk = 0;
+                system("clear");
+                cout << "Training mode\n\n";
+                qr[0]=pr[0];
+                qc[0]=pc[0];
+                for (int i=1;i<=n;++i) {
+                    cout<<(i==qr[0]&&1==qc[0]?'[':' ');
+                    for (int j=1;j<=m;++j) {
+                        cout<<mp[i][j];
+                        cout<<(i==qr[0]&&j==qc[0]?']':i==qr[0]&&j==qc[0]-1?'[':' ');
+                    }
+                    putchar('\n');
+                }
+                cout<<endl;
+                cout<<"Current streak: "<<curstrk<<" | Best: "<<bststrk<<"\nGuess (Arrow Keys) | Check (0) | Exit (quit) | Skip (skip): ";
+                setcolor("red");
+                printf("\nWrong Answer!\n");
+                setcolor();
+                cout<<"Press <Enter> to continue\n";
+                getchar();
+                break;
+            }
+            else if (!x) {
+                break;
+            }
+        }
+    }
+}
+void duel()
+{
+    cout<<"Duel is currently in development. Wait until the next update!\n";
+    return;
 }
 int main()
 {
-    cout << "Codeforces\nSelect Section (Contest, Training, Interactive): ";
+    cout << "Codeforces\nSelect Section (Contest, Training, Interactive, Duel): ";
     cin >> n;
     if (n == 1) contest();
     else if (n == 2) training_mode();
     else if (n == 3) find_C_in_A_and_B();
+    else if (n == 4) duel();
     else cout << "Invalid input.\nTerminated.\n";
     return 0;
 }

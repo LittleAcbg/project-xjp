@@ -26,21 +26,42 @@
 
 ## Section 3: Interaction
 
-> 2026.05.22 立项
+题目会有两个不同的混淆项，例如 `己已已己已巳己己`。
 
-将有两个不同的混淆项。
+目前所有操作与 Section 2: Training mode 一致。
+
+## Section 4: Duel
+
+> 开发中，暂不开放\
+> 2026.05.23 立项
+
+双方对战，找到对方隐藏的错别字。已经搜查过的点会变成错别字标记。
 
 ## 自定义题目
 
-你只需要改变 `xjp.settings` 中的内容，每行一组字表示题目。
+对于 Section 1,2，你只需要改变 `xjp.settings` 中的内容，每行一组两个字符串表示题目。有自动排列。
+
+对于 Section 3，你只需要改变 `interaction.settings` 中的内容，每行一组三个字符串表示题目。有自动排列。
+
+对于 Section 4，你只需要改变 `duel.settings` 中的内容，每行一组三个字符串表示题目。无自动排列，不同顺序须输入多组。
+
+题目中不能有空格或空串，空格为分隔符。
 
 # Changelog
+
+### 2026.05.23
+
+Section 4: Duel 立项。功能：两玩家对战，找到对方隐藏的错别字。
+
+Section 3: Interaction 完成。
+
+相应地调整了本文档。
 
 ### 2026.05.22
 
 更新了 Codeforces 的 UI，现在要选择 Section 而不是用 `-1` 代表 Training。并进行了一些细节的调整。
 
-新 Section——Interaction 立项。功能：有两个不同的混淆项。
+Section 3: Interaction 立项。功能：有两个不同的混淆项。
 
 相应地调整了本文档。
 

@@ -3,11 +3,11 @@
 using namespace std;
 int n,m,l,cnt,pr[30],pc[30],qr[30],qc[30],qw[30],pl,curstrk,bststrk;
 double base,score,dt;
-bool vis[30],wa[30];
+bool vis[30],wa[30],inter[30];
 string s,seed;
 char c;
 chrono::high_resolution_clock::time_point ti,ti2;
-string mp[40][40];
+string mp[30][40][40];
 void setcolor(string s) {
     if (s=="red") cout<<"\033[1;31m";
     else if (s=="cyan") cout<<"\033[1;36m";
@@ -34,17 +34,17 @@ int render(int k) {
         cout<<" \n"[i==l];
     }
     setcolor();
-    cout<<endl;
+    cout<<"\nThis problem is "<<(inter[k]?"Interactive":"Traditional")<<".\n"<<endl;
     for (int i=1;i<=n;++i) {
         cout<<(i==qr[k]&&1==qc[k]?'[':' ');
         for (int j=1;j<=m;++j) {
-            cout<<(i==pr[k]&&j==pc[k]?c2[qw[k]]:c1[qw[k]]);
+            cout<<mp[k][i][j];
             cout<<(i==qr[k]&&j==qc[k]?']':i==qr[k]&&j==qc[k]-1?'[':' ');
         }
         putchar('\n');
     }
     cout<<endl;
-    cout<<"Base pt "<<base<<" | Current score "<<score<<"\nGuess (Arrow Keys) | Check (0) | Exit (quit) | Pause (=) | Jump (Letters): ";
+    cout<<"Base pt "<<base<<" | Current score "<<score<<"\nGuess (Arrow Keys) | Check (0) | Exit (quit) | Pause (=) | Jump[0] (Letters): ";
     getline(cin,s);
     if (!s.size()) return 1;
     else if (s.size()>=4&&s.substr(0,4)=="quit") return 0;
@@ -217,17 +217,38 @@ void contest() {
     }
     cout<<"Seed: ";
     cin>>seed;
+    cout<<"Interaction prob (0-100 integer): ";
+    int prob;
+    cin>>prob;
+    if (prob<0) prob=0;
+    else if (prob>100) prob=100;
     mt19937 rnd(hash<string>()(seed));
     cout<<"Press <Enter> to start\n";
     getchar();
     getchar();
-    for (int i=1;i<=l;++i) {
-        pr[i]=rnd()%n+1;
-        pc[i]=rnd()%m+1;
-        qw[i]=rnd()%N+1;
-        qr[i]=1;
-        qc[i]=1;
-    }
+    for (int k=1;k<=l;++k)
+        if (rnd()%100<prob) {
+            inter[k]=1;
+            pr[k]=rnd()%n+1;
+            pc[k]=rnd()%m+1;
+            qw[k]=rnd()%INTER+1;
+            qr[k]=1;
+            qc[k]=1;
+            for (int i=1;i<=n;++i) for (int j=1;j<=m;++j)
+                if (i==pr[k]&&j==pc[k]) mp[k][i][j]=a1[qw[k]];
+                else if (rnd()&1) mp[k][i][j]=a2[qw[k]];
+                else mp[k][i][j]=a3[qw[k]];
+        }
+        else {
+            pr[k]=rnd()%n+1;
+            pc[k]=rnd()%m+1;
+            qw[k]=rnd()%N+1;
+            qr[k]=1;
+            qc[k]=1;
+            for (int i=1;i<=n;++i) for (int j=1;j<=m;++j)
+                if (i==pr[k]&&j==pc[k]) mp[k][i][j]=c1[qw[k]];
+                else mp[k][i][j]=c2[qw[k]];
+        }
     pl=1;
     cout<<fixed<<setprecision(3);
     ti=chrono::high_resolution_clock::now();
@@ -256,7 +277,7 @@ int interact() {
     for (int i=1;i<=n;++i) {
         cout<<(i==qr[0]&&1==qc[0]?'[':' ');
         for (int j=1;j<=m;++j) {
-            cout<<mp[i][j];
+            cout<<mp[0][i][j];
             cout<<(i==qr[0]&&j==qc[0]?']':i==qr[0]&&j==qc[0]-1?'[':' ');
         }
         putchar('\n');
@@ -320,9 +341,9 @@ void find_C_in_A_and_B()
         qr[0]=1;
         qc[0]=1;
         for (int i=1;i<=n;++i) for (int j=1;j<=m;++j)
-            if (i==pr[0]&&j==pc[0]) mp[i][j]=a1[qw[0]];
-            else if (rnd()&1) mp[i][j]=a2[qw[0]];
-            else mp[i][j]=a3[qw[0]];
+            if (i==pr[0]&&j==pc[0]) mp[0][i][j]=a1[qw[0]];
+            else if (rnd()&1) mp[0][i][j]=a2[qw[0]];
+            else mp[0][i][j]=a3[qw[0]];
         while (1) {
             int x=interact();
             if (x==2) {
@@ -349,7 +370,7 @@ void find_C_in_A_and_B()
                 for (int i=1;i<=n;++i) {
                     cout<<(i==qr[0]&&1==qc[0]?'[':' ');
                     for (int j=1;j<=m;++j) {
-                        cout<<mp[i][j];
+                        cout<<mp[0][i][j];
                         cout<<(i==qr[0]&&j==qc[0]?']':i==qr[0]&&j==qc[0]-1?'[':' ');
                     }
                     putchar('\n');

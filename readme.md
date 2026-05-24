@@ -12,6 +12,8 @@
 
 有 10\*10\*6、15\*15\*10、20\*20\*12、30\*30\*15 四档。30\*30\*15 为隐藏档，输入 `0` 来进入。
 
+接着输入 Interaction prob，表示出现交互题的概率是百分之多少，如果只想要传统题可以输入 `0`。
+
 按上下左右键并 `<Enter>` 来移动，`0` 提交评测，`quit` 退出，`=` 暂停计时器（同时会隐藏题目）。
 
 ## Section 2: Training mode
@@ -20,15 +22,15 @@
 
 无限题目，无限时间，统计连续 AC 表现。
 
-`quit` 退出，`skip` 跳过题目，不包括暂停功能。
+`quit` 退出，`skip` 跳过题目，没有实现暂停功能。
 
 每题只有一次提交机会，若 WA 则会显示正确答案。
 
-## Section 3: Interaction
+## Section 3: Interaction Training
 
 题目会有两个不同的混淆项，例如 `己已已己已巳己己`。
 
-目前所有操作与 Section 2: Training mode 一致。
+所有操作与 Section 2: Training mode 一致。
 
 ## Section 4: Duel
 
@@ -39,9 +41,9 @@
 
 ## 自定义题目
 
-对于 Section 1,2，你只需要改变 `xjp.settings` 中的内容，每行一组两个字符串表示题目。有自动排列。
+对于 Section 2 与 Section 1 的传统题，你只需要改变 `xjp.settings` 中的内容，每行一组两个字符串表示题目。有自动排列。
 
-对于 Section 3，你只需要改变 `interaction.settings` 中的内容，每行一组三个字符串表示题目。有自动排列。
+对于 Section 3 与 Section 1 的交互题，你只需要改变 `interaction.settings` 中的内容，每行一组三个字符串表示题目。有自动排列。
 
 对于 Section 4，你只需要改变 `duel.settings` 中的内容，每行一组三个字符串表示题目。无自动排列，不同顺序须输入多组。
 
@@ -49,15 +51,29 @@
 
 # Changelog
 
+### 2026.05.24
+
+> xjp-v1.1.0-linux
+
+在 Section 1: Contest mode 中加入交互题支持。
+
+相应地调整了本文档。
+
+在本文档的 Changelog 部分加入了版本信息。
+
 ### 2026.05.23
+
+> xjp-v1.1-alpha-linux (Pre-release)
 
 Section 4: Duel 立项。功能：两玩家对战，找到对方隐藏的错别字。
 
-Section 3: Interaction 完成。
+Section 3: Interaction Training 完成。
 
 相应地调整了本文档。
 
 ### 2026.05.22
+
+> xjp-v1.0.0-linux
 
 更新了 Codeforces 的 UI，现在要选择 Section 而不是用 `-1` 代表 Training。并进行了一些细节的调整。
 

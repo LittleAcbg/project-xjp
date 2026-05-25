@@ -44,7 +44,7 @@ int render(int k) {
         putchar('\n');
     }
     cout<<endl;
-    cout<<"Base pt "<<base<<" | Current score "<<score<<"\nGuess (Arrow Keys) | Check (0) | Exit (quit) | Pause (=) | Jump[0] (Letters): ";
+    cout<<"Base pt "<<base<<" | Current score "<<score<<"\nGuess (Arrow Keys) | Check (0) | Exit (quit) | Pause (=) | Jump (Letters): ";
     getline(cin,s);
     if (!s.size()) return 1;
     else if (s.size()>=4&&s.substr(0,4)=="quit") return 0;

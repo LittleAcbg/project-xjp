@@ -1,0 +1,13 @@
+# Project-xjp (Codeforces)
+
+**Only supported on Linux. Windows encoding of Chinese characters is strange. You must ensure that the command `g++` is enabled.**
+
+**The project has only been tested on Ubuntu Linux 20.04. You may report issues for other systems.**
+
+**HTML version is currently in progress.**
+
+Maybe not only Codeforces...
+
+Origin: <https://note.ms/gjzxjp>.
+
+Developed by LittleAcbg.

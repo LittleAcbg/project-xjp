@@ -1,5 +1,49 @@
 # Project-xjp (Codeforces)
 
+## xjp-html
+
+运行方式：<https://littleacbg.github.io/xjp/index.html>
+
+### Section 1: Contest mode
+
+有 10\*10\*6、15\*15\*10、20\*20\*12、30\*30\*15 四档。30\*30\*15 为隐藏档，输入 `0` 来进入。
+
+随机种子可为任意字符串。不保证 HTML 与 Linux 版本间相同字符串会返回相同结果，但保证不同设备或不同系统上 HTML 版本结果一样。
+
+直接按按钮来操作，在初始页面可自定义题目，每行一组两个字符串表示题目，至少一组。
+
+**Linux 版本没有的功能**：时间结束后会展示失败题目的正确答案。
+
+### Section 2: Training mode
+
+有 10\*10、15\*15、20\*20、30\*30 四档。30\*30 为隐藏档，输入 `0` 来进入。
+
+无限题目，无限时间，统计连续 AC 表现。
+
+任意点击一个位置来跳过题目并显示正确答案，没有实现暂停功能。
+
+每题只有一次提交机会，若 WA 则会显示正确答案。
+
+### Section 3: Interaction Training
+
+> 开发中，暂不开放\
+> Linux 版已发布
+
+题目会有两个不同的混淆项，例如 `己已已己已巳己己`。
+
+所有操作与 Section 2: Training mode 一致。
+
+### Section 4: Duel
+
+> 开发中，暂不开放\
+> 2026.05.23 立项
+
+双方对战，找到对方隐藏的错别字。已经搜查过的点会变成错别字标记。
+
+## xjp-linux
+
+下载位置：<https://www.github.com/LittleAcbg/project-xjp>
+
 运行方式：
 
 ```bash
@@ -8,7 +52,9 @@
 
 按提示操作即可，先输入 Section、Division，再输入随机种子即可开始。
 
-## Section 1: Contest mode
+随机种子可为任意字符串，不保证 HTML 与 Linux 版本间相同字符串会返回相同结果。
+
+### Section 1: Contest mode
 
 有 10\*10\*6、15\*15\*10、20\*20\*12、30\*30\*15 四档。30\*30\*15 为隐藏档，输入 `0` 来进入。
 
@@ -16,7 +62,9 @@
 
 按上下左右键并 `<Enter>` 来移动，`0` 提交评测，`quit` 退出，`=` 暂停计时器（同时会隐藏题目）。
 
-## Section 2: Training mode
+**HTML 版本没有的功能**：WA 后还可以重新提交。
+
+### Section 2: Training mode
 
 有 10\*10、15\*15、20\*20、30\*30 四档。30\*30 为隐藏档，输入 `0` 来进入。
 
@@ -26,30 +74,37 @@
 
 每题只有一次提交机会，若 WA 则会显示正确答案。
 
-## Section 3: Interaction Training
+### Section 3: Interaction Training
 
 题目会有两个不同的混淆项，例如 `己已已己已巳己己`。
 
 所有操作与 Section 2: Training mode 一致。
 
-## Section 4: Duel
+### Section 4: Duel
 
 > 开发中，暂不开放\
 > 2026.05.23 立项
 
 双方对战，找到对方隐藏的错别字。已经搜查过的点会变成错别字标记。
 
-## 自定义题目
+### 自定义题目
 
-对于 Section 2 与 Section 1 的传统题，你只需要改变 `xjp.settings` 中的内容，每行一组两个字符串表示题目，至少一组。有自动排列。
+对于 Section 2 与 Section 1 的传统题，你只需要改变 `xjp.settings` 中的内容，每行一组两个字符串表示题目，至少一组。
 
-对于 Section 3 与 Section 1 的交互题，你只需要改变 `interaction.settings` 中的内容，每行一组三个字符串表示题目，至少一组。有自动排列。
-
-对于 Section 4，你只需要改变 `duel.settings` 中的内容，每行一组三个字符串表示题目，**至少两组**。三个字符串依次作为题面、答案和混淆项，无自动排列，不同顺序须输入多组。
+对于 Section 3 与 Section 1 的交互题，你只需要改变 `interaction.settings` 中的内容，每行一组三个字符串表示题目，至少一组。
 
 题目中不能有空格或空串，空格为分隔符，**每行的字符串须互不相同**。
 
 # Changelog
+
+### 2026.06.03
+
+> xjp-linux-v1.1.3\
+> xjp-html-v1.0.0
+
+去除了 Linux 中 `duel.settings`。
+
+进行了本文档的排版调整，**将 HTML 版本加入此文档**。
 
 ### 2026.05.25
 

@@ -4,7 +4,7 @@ using namespace std;
 int n,m,l,cnt,pr[30],pc[30],qr[30],qc[30],qw[30],pl,curstrk,bststrk;
 double base,score,dt;
 bool vis[30],wa[30],inter[30];
-string s,seed;
+string s,seed,name[3];
 char c;
 chrono::high_resolution_clock::time_point ti,ti2;
 string mp[30][40][40];
@@ -34,7 +34,7 @@ int render(int k) {
         cout<<" \n"[i==l];
     }
     setcolor();
-    cout<<"\nThis problem is "<<(inter[k]?"Interactive":"Traditional")<<".\n"<<endl;
+    cout<<"\nThis problem is "<<(inter[k]?"Interactive":"Traditional")<<".\n\n";
     for (int i=1;i<=n;++i) {
         cout<<(i==qr[k]&&1==qc[k]?'[':' ');
         for (int j=1;j<=m;++j) {
@@ -390,10 +390,51 @@ void find_C_in_A_and_B()
         }
     }
 }
+bool setproblem(int k) {
+    system("clear");
+    cout<<name[k]<<" currently setting problem.\n\n";
+    for (int i=1;i<=n;++i) {
+        cout<<(i==qr[k]&&1==qc[k]?'[':' ');
+        for (int j=1;j<=m;++j) {
+            cout<<mp[k][i][j];
+            cout<<(i==qr[k]&&j==qc[k]?']':i==qr[k]&&j==qc[k]-1?'[':' ');
+        }
+        putchar('\n');
+    }
+    cout<<endl;
+    cout<<"Move (Arrow Keys) | Flip (0) | Confirm (confirm): ";
+    getline(cin,s);
+    if (!s.size()) return 1;
+    else if (s.size()>=4&&s.substr(0,4)=="confirm") {
+        for (int i = 1; i <= n; ++i) for (int j = 1; j <= m; ++j)
+        {
+            if (mp[k][i][j] == d1[qw[k]]) continue;
+            if (i >= 2 && mp[k][i - 1][j] == d2[qw[k]]) continue;
+            if (j >= 2 && mp[k][i][j - 1] == d2[qw[k]]) continue;
+            
+        }
+    }
+    c=s[0];
+    if (c=='0') {
+        mp[k][qr[k]][qc[k]]=(mp[k][qr[k]][qc[k]]==d1[qw[k]]?d2[qw[k]]:d1[qw[k]]);
+    }
+    else if (c==27) {
+        c=s[2];
+        if (!vis[k]) {
+            if (c==65) qr[k]=(qr[k]+n-2)%n+1;
+            else if (c==66) qr[k]=qr[k]%n+1;
+            else if (c==68) qc[k]=(qc[k]+m-2)%m+1;
+            else if (c==67) qc[k]=qc[k]%m+1;
+        }
+    }
+    return 1;
+}
 void duel()
 {
-    cout<<"Duel is currently in development. Wait until the next update!\n";
+    system("clear");
+    cout << "Not completed yet.\n";
     return;
+    n=m=10;
 }
 int main()
 {
